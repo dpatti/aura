@@ -117,7 +117,7 @@ aurPkgInfo (fmap T.pack -> pkgs) = aurInfo pkgs >>= traverse_ displayAurPkgInfo
 -- PKGBUILD exists on the AUR servers as well.
 displayAurPkgInfo :: AurInfo -> Aura ()
 displayAurPkgInfo ai = ask >>= \ss -> do
-    let name = T.unpack $ aurNameOf ai
+    let name = T.unpack $ pkgBaseOf ai
     ns <- fromJust <$> pkgbuild (managerOf ss) name >>= namespace name . T.unpack
     liftIO $ putStrLn $ renderAurPkgInfo ss ai ns <> "\n"
 
